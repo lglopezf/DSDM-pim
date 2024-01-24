@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <title>Diagramas a partir de texto</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link type=‘text/css’ rel=‘stylesheet’ href=‘https://www.uco.es/~in1rosaj/tools/jsUML2/ejemplos/css/UDStyle.css’ media=‘screen’ />
+  
+  <script type="text/javascript" src="https://www.uco.es/~in1rosaj/tools/jsUML2/ejemplos/UDCore.js"></script>
+  <script type="text/javascript" src="https://www.uco.es/~in1rosaj/tools/jsUML2/ejemplos/UDModules.js"></script>
+
+  <script type="text/javascript">
+    window.onload = function () {
+
+      var classDiagram = new UMLClassDiagram(
+        { id: 'classDiagram', width: 800, height: 500 }
+      );
+      classDiagram.setName('Modelo PIM')
+
+      // CLASES
+      var persona = new UMLClass({ x: 100, y: 50 });
+      var cuenta_bancaria = new UMLClass({ x: 120, y: 250 });
+      var tipo_identificacion = new UMLClass({ x: 400, y: 70 });
+      var tipo_cuenta = new UMLClass({ x: 400, y: 255 });
+
+      persona.setName("Persona");
+      persona.addAttribute('+nombres:String');
+      persona.addAttribute('+apellidos:String');
+      persona.addAttribute('+numero_identificacion:String');
+      persona.addAttribute('+tipo_identificacion:String');
+      persona.addOperation('+getNombres():String');
+      persona.addOperation('+setNombres(nombres)');
+
+      cuenta_bancaria.setName("CuentaBancaria");
+      cuenta_bancaria.addAttribute('+numero:String');
+      cuenta_bancaria.addAttribute('+tipo_cuenta: TipoCuenta');
+      cuenta_bancaria.addOperation('+getNumero():String');
+      cuenta_bancaria.addOperation('+setNumero(nombres)');
+
+      tipo_identificacion.setName("<<enumeration>>\nTipoIdentificacion");
+      tipo_identificacion.addAttribute('CEDULA');
+      tipo_identificacion.addAttribute('PASAPORTE');
+
+      tipo_cuenta.setName("<<enumeration>>\nTipoCuenta");
+      tipo_cuenta.addAttribute('AHORRO');
+      tipo_cuenta.addAttribute('CORRIENTE');
+
+
+      classDiagram.addElement(persona);
+      classDiagram.addElement(cuenta_bancaria);
+      classDiagram.addElement(tipo_identificacion);
+      classDiagram.addElement(tipo_cuenta);
+
+      // RELACIONES
+      var composicion = new UMLComposition({ a: persona, b: cuenta_bancaria });
+      composicion.setValue( 'name', 'tiene');
+      classDiagram.addElement(composicion);
+
+      var dependencia1 = new UMLDependency({ a: persona, b: tipo_identificacion });
+      classDiagram.addElement(dependencia1);
+
+      var dependencia2 = new UMLDependency({ a: cuenta_bancaria, b: tipo_cuenta });
+      classDiagram.addElement(dependencia2);
+
+      classDiagram.draw();
+      classDiagram.interaction(true);
+    }
+  </script>
+</head>
+
+<body>
+
+  <div class="row">
+    <div class="col-md-10 m-auto my-5">
+      <div class="card">
+        <div class="card-header">
+          <strong>Diagrama de clases con jsUML2 (PIM)</strong>
+        </div>
+        <div class="card-body">
+          <p>
+            Ejemplo librería <a target="_blank"
+              href="https://www.uco.es/users/in1rosaj//tools/jsUML2/doc/TheProgrammersGuide_003.htm">jsUML2</a>
+            para crear diagramas a partir de texto y su
+            <a target="_blank" href="https://www.uco.es/~in1rosaj/tools/jsUML2/editor/index.html">Live editor</a>
+          </p>
+          <div id="classDiagram"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>
