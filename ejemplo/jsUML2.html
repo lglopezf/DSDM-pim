@@ -58,16 +58,21 @@
       // RELACIONES
       var composicion = new UMLComposition({ a: persona, b: cuenta_bancaria });
       composicion.setValue( 'name', 'tiene');
+      composicion.setMultiplicityA('1');
+      composicion.setMultiplicityB('*')
       classDiagram.addElement(composicion);
 
       var dependencia1 = new UMLDependency({ a: persona, b: tipo_identificacion });
       classDiagram.addElement(dependencia1);
 
-      var dependencia2 = new UMLDependency({ a: cuenta_bancaria, b: tipo_cuenta });
+      var dependencia2 = new UMLDependency({ a: cuenta_bancaria, b: tipo_cuenta })
       classDiagram.addElement(dependencia2);
+
+
 
       classDiagram.draw();
       classDiagram.interaction(true);
+
     }
   </script>
 </head>

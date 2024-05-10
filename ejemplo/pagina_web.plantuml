@@ -1,0 +1,27 @@
+ @startuml
+    class Paginaweb {
+    -nombre: string
+    +getNombre(): string
+    +setNombre(nombre: string): void
+    }
+
+
+    class Header {
+    +titulo: string
+    +nombre: double
+    }
+
+
+    class Paragraph {
+    +texto: string
+    }
+
+
+    class Footer {
+    +info: string
+    }
+
+    Paginaweb "1" *-- "1" Header : tiene
+    Paginaweb "1" *-- "0..*" Paragraph : tiene
+    Paginaweb "1" *-- "1" Footer : tiene
+@enduml
