@@ -2,5 +2,5 @@
 
 - Librería Mermaid
 - Librería JsUML2
-
+- Librería PlantUml
 
